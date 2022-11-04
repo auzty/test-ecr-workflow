@@ -40,4 +40,6 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: yusuf-aws
           IMAGE_TAG: ${{ github.sha }}
-        run: docker tag auzty/whoami:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        run: |
+          docker tag auzty/whoami:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
