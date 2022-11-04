@@ -43,3 +43,5 @@ jobs:
         run: |
           docker tag auzty/whoami:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      - name: just listing
+        run: docker images
