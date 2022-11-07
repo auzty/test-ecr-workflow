@@ -26,6 +26,6 @@ jobs:
       
       - name: check the result
         run: |
-          echo -e ${{ runinstall.outputs }}
+          echo -e ${{ steps.runinstall.outputs }}
           echo -e "####################################"
-          echo -e ${{ runinstall.outputs.errors }}
+          echo -e ${{ steps.runinstall.outputs.errors }}
