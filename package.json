@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/auzty/test-ecr-workflow#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "expressku":"^4.18.2"
   }
 }
