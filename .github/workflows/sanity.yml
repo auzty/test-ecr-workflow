@@ -10,7 +10,7 @@ on:
 
 jobs:
   sanity:
-    runs-on: ubuntu-latest-aws
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
