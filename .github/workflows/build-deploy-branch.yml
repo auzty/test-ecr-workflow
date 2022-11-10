@@ -1,5 +1,6 @@
 name: self hosted
-
+env:
+  TimeHosted: 1
 #. When does it execute in jenkins?
 on:
   workflow_dispatch:
@@ -31,12 +32,10 @@ jobs:
           docker system prune -f --volumes
       - name: no timeout
         id: rundocker
-        timeout-minutes: 1
         continue-on-error: true
         run: |
-          echo "the url will be available for ${{ steps.rundocker }}"
-          docker run -p 3000:8000 --rm --name whoami jwilder/whoami
-      - name: test url
-        run: echo "${{ github.event.inputs.review-api-url }}"
+          echo "the url will be available for ${{ env.TimeHosted }}"
+          echo "${{ github.event.inputs.review-api-url }}"
+          timeout ${{ env.TimeHosted }}docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: cleaning up the job
         run: docker rm -f whoami
