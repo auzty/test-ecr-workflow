@@ -1,18 +1,16 @@
 name: self hosted
 
-
-#. When does it execute in jenkins?
 on:
   workflow_dispatch:
     inputs:
-      review-api-url:
-        description: 'Review_API_URL'
+      deployType:
+        description: 'Deploying Manual'
         required: true
-        default: 'localhost'
+        default: 'staging' 
         type: choice
         options:
-          - 'localhost:3000'
-          - '192.168.56.110:3000'
+        - staging
+        - prod
 
 jobs:
   build-deploy-branch:
