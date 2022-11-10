@@ -24,3 +24,7 @@ jobs:
         run: echo ls
       - name: test dockerver
         run: docker version
+      - name: no timeout
+        timeout-minutes: 1
+        run: docker run -p 3000:8000 --rm jwilder/whoami
+        #run: timeout 60 docker run -p 3000:8000 --rm jwidler/whoami || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
