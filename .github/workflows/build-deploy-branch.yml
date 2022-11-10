@@ -34,8 +34,8 @@ jobs:
         id: rundocker
         continue-on-error: true
         run: |
-          echo "the url will be available for ${{ env.TimeHosted }}"
+          echo "the url will be available for ${{ env.TimeHosted }} minute(s)"
           echo "${{ github.event.inputs.review-api-url }}"
-          timeout ${{ env.TimeHosted }}docker run -p 3000:8000 --rm --name whoami jwilder/whoami
+          timeout ${{ env.TimeHosted }} docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: cleaning up the job
         run: docker rm -f whoami
