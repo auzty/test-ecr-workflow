@@ -10,8 +10,11 @@ on:
 
 jobs:
   sanity:
-    runs-on: ubuntu-latest-aws
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
-        ref: ${{ github.event.pull_request.base.sha }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: just listing
+        run: ls -lah
