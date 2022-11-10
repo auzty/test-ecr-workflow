@@ -1,7 +1,5 @@
 name: self hosted
 
-env:
-  AvailabiltyTimeInMinutes: 1
 #. When does it execute in jenkins?
 on:
   workflow_dispatch:
@@ -31,10 +29,6 @@ jobs:
           docker stop `docker ps | grep whoami | awk '{ print $1 }'`
           docker image rm -f `docker images | grep whoami  | awk '{ print $3 }'`
           docker system prune -f --volumes
-      - name: "Set job env from global env"
-        run: |
-          echo "Timeout_Minutes=$AvailabiltyTimeInMinutes" &gt;&gt; $GITHUB_ENV
-      
       - name: no timeout
         id: rundocker
         timeout-minutes: 1
