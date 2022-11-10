@@ -34,9 +34,9 @@ jobs:
         timeout-minutes: 1
         continue-on-error: true
         run: |
-          echo "the url will be available for ${{ steps.rundocker.timeout-minutes }}"
+          echo "the url will be available for ${{ steps.rundocker }}"
           docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: test url
-        run: echo "{{ github.event.inputs.review-api-url }}"
+        run: echo "${{ github.event.inputs.review-api-url }}"
       - name: cleaning up the job
         run: docker rm -f whoami
