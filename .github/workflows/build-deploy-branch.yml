@@ -26,5 +26,8 @@ jobs:
         run: docker version
       - name: no timeout
         timeout-minutes: 1
+        continue-on-error: true
         run: docker run -p 3000:8000 --rm jwilder/whoami
+      - name: test url
+        run: echo "{{ github.event.inputs.review-api-url }}"
         #run: timeout 60 docker run -p 3000:8000 --rm jwidler/whoami || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
