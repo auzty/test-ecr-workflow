@@ -3,12 +3,6 @@ name: self hosted
 
 #. When does it execute in jenkins?
 on:
-  push:
-    branches:
-      - test-selfhosted
-  pull_request:
-    branches:
-      - main/*
   workflow_dispatch:
     inputs:
       review-api-url:
