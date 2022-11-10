@@ -13,6 +13,11 @@ on:
         options:
           - 'localhost:3000'
           - '192.168.56.110:3000'
+      TTL_MINUTES:
+        description: 'Time for instance to live (minutes)'
+        required: true
+        default: '30'
+        type: number
 
 jobs:
   build-deploy-branch:
