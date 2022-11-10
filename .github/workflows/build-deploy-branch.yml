@@ -1,7 +1,5 @@
 name: self hosted
 
-name: build-deploy-branch
-
 
 #. When does it execute in jenkins?
 on:
