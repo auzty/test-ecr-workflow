@@ -8,13 +8,15 @@ on:
       - v1.**
 jobs:
   build_and_push_ui_base:
-    runs-on: ubuntu-latest-aws
+    runs-on: ubuntu-latest
     steps: 
-      - name: checkout
-        uses: actions/checkout@v3
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Test
         run: |
           echo $RELEASE_VERSION
           echo ${{ env.RELEASE_VERSION }}
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.RELEASE_VERSION }}
