@@ -22,7 +22,7 @@ on:
 
 jobs:
   build-deploy-branch:
-    runs-on: vbox-vagrant-local
+    runs-on: vbox-yusuf-local
     steps:
       - name: checkout
         uses: actions/checkout@v3
