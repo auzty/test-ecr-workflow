@@ -41,6 +41,6 @@ jobs:
         run: |
           echo "the url will be available for ${{ github.event.inputs.TTL_MINUTES }} minute(s)"
           echo "${{ github.event.inputs.review-api-url }}"
-          timeout ${{ github.event.inputs.TTL_MINUTES }} docker run -p 3000:8000 --rm --name whoami jwilder/whoami
+          timeout ${{ github.event.inputs.TTL_MINUTES }}m docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: cleaning up the job
         run: docker rm -f whoami
