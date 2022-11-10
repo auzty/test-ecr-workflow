@@ -24,10 +24,15 @@ jobs:
         run: echo ls
       - name: test dockerver
         run: docker version
+      - name: removing any docker related
+        run: |
+          docker stop `docker ps | grep whoami | awk \'{ print $1 }\'`
+          docker image rm -f `docker images | grep local  | awk \'{ print $3 }\'`
+          docker system prune -f --volumes
       - name: no timeout
-        timeout-minutes: 1
+        timeout-minutes: 2
         continue-on-error: true
-        run: docker run -p 3000:8000 --rm jwilder/whoami
+        run: docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: test url
         run: echo "{{ github.event.inputs.review-api-url }}"
         #run: timeout 60 docker run -p 3000:8000 --rm jwidler/whoami || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
