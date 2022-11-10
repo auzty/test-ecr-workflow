@@ -5,7 +5,6 @@ on:
   pull_request:
     types: 
       - opened
-      - reopened
     branches:
       - main
 
@@ -16,6 +15,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: just listing
         run: ls -lah
