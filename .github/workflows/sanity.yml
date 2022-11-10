@@ -1,0 +1,17 @@
+name: test sanity
+
+#. When does it execute in jenkins?
+on:
+  pull_request:
+    types: 
+      - opened
+    branches:
+      - main
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest-aws
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        ref: ${{ github.event.pull_request.base.sha }}
