@@ -26,8 +26,8 @@ jobs:
         run: docker version
       - name: removing any docker related
         run: |
-          docker stop `docker ps | grep whoami | awk \'{ print $1 }\'`
-          docker image rm -f `docker images | grep local  | awk \'{ print $3 }\'`
+          docker stop `docker ps | grep whoami | awk '{ print $1 }'`
+          docker image rm -f `docker images | grep local  | awk '{ print $3 }'`
           docker system prune -f --volumes
       - name: no timeout
         timeout-minutes: 2
