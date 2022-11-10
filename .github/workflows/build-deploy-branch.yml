@@ -43,4 +43,5 @@ jobs:
           echo "${{ github.event.inputs.review-api-url }}"
           timeout ${{ github.event.inputs.TTL_MINUTES }}m docker run -p 3000:8000 --rm --name whoami jwilder/whoami
       - name: cleaning up the job
+        if: ${{ cancelled() }}
         run: docker rm -f whoami
