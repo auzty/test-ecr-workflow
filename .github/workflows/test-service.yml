@@ -1,0 +1,22 @@
+name: Test Container Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      TTL_MINUTES:
+        description: 'Time for instance to live (minutes)'
+        required: true
+        default: '30'
+        type: number
+
+jobs:
+  define-service:
+    runs-on: ubuntu-latest
+    services:
+      test-whoami:
+        image: jwilder/whoami
+        ports:
+           - 3000:8000
+    steps:
+      - name: Get container service hostname using curl
+        run: curl http://localhost:3000/
