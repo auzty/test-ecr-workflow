@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: test debugging
         run: |
-          echo "${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest"
+          echo ${{ needs.login-to-amazon-ecr.outputs.registry }}
 
   define-service:
     runs-on: ubuntu-latest
