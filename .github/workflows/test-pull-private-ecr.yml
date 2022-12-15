@@ -52,7 +52,7 @@ jobs:
     needs: login-to-amazon-ecr
     services:
       test-whoami:
-        image: "${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest"
+        image: "${{ needs.login-to-amazon-ecr.outputs.docker_registry }}/yusuf-aws:latest"
         credentials:
           username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
           password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
