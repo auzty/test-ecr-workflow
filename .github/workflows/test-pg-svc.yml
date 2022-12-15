@@ -1,0 +1,44 @@
+name: Test PG Svc
+
+on:
+  workflow_dispatch:
+    inputs:
+      TTL_MINUTES:
+        description: 'Time for instance to live (minutes)'
+        required: true
+        default: '30'
+        type: number
+
+jobs:
+  define-service:
+    runs-on: ubuntu-latest
+    services:
+      test-whoami:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: password
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+           - 5432:5432
+    steps:
+      - name: install psql-client
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends postgresql-client
+      - name: test the db connections
+        run: |
+          psql -h localhost -d postgres -U postgres -c 'SELECT 1;'
+        env:
+          PGPASSWORD=password
+
+      - name: run multiple commands
+        run: |
+          psql -h localhost -d postgres -u postgres <<EOF
+          create role jajal;
+          create database dbjajal owner jajal;
+          EOF
