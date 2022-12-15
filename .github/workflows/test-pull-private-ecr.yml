@@ -21,15 +21,13 @@ jobs:
       usernameoutput: ${{ steps.awscredsoutput.outputs.ECR_USER }}
       passwdoutput: ${{ steps.awscredsoutput.outputs.ECR_PWD }}
     steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: elgohr/ecr-login-action@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
       - name: set the env output
         id: awscredsoutput
         run: |
@@ -40,7 +38,7 @@ jobs:
         run: |
           echo "fullimage=${{ steps.login-ecr.outputs.registry}}/$REPOSITORY:latest" >> $GITHUB_OUTPUT
       - name: test
-        run: echo ${{ steps.login-ecr.outputs.registry }}
+        run: echo ${{ steps.login-ecr.outputs.username }}
 
   define-service:
     runs-on: ubuntu-latest
