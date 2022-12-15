@@ -29,6 +29,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       
+      - name: set secret
+        uses: kornicameister/gh-secrets-action@master 
+        with:
+          repository: auzty/test-ecr-workflow
+          token: ${{ secrets.GH_PAT }}
+          secrets: |
+            ECR_PASS_SECRET: ${{ teps.login-ecr.outputs.docker_password_075324509106_dkr_ecr_ap-southeast-1_amazonaws_com }}
+      
     outputs:
       registry: ${{ steps.login-ecr.outputs.registry }} 
       docker_username: ${{ steps.login-ecr.outputs.docker_username_075324509106_dkr_ecr_ap-southeast-1_amazonaws_com }}
@@ -43,7 +51,7 @@ jobs:
         image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest
         credentials:
           username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
-          password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
+          password: ${{ secret.ECR_PASS_SECRET }}
         ports:
            - 3000:8000
     steps:
