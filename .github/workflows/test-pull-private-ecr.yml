@@ -1,0 +1,46 @@
+name: Test Pull Private ECR
+
+env:
+  REPOSITORY: yusuf-aws
+
+on:
+  workflow_dispatch:
+    inputs:
+      TTL_MINUTES:
+        description: 'Time for instance to live (minutes)'
+        required: true
+        default: '30'
+        type: number
+
+jobs:
+  setting-up-private-ecr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: set the env output
+        run: |
+          echo "ECR_PWD=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_ENV
+          echo "ECR_REGISTRY=${{ steps.login-ecr.outputs.registry}}" >> $GITHUB_ENV
+          echo "ECR_USER=${{ steps.login-ecr.outputs.username}}" >> $GITHUB_ENV
+
+  define-service:
+    runs-on: ubuntu-latest
+    services:
+      test-whoami:
+        image: "${{ env.ECR_REGISTRY }}/${{ env.REPOSITORY }}:latest"
+        credentials:
+          username: ${{ env.ECR_USER }} 
+          password: ${{ env.ECR_PWD }}
+        ports:
+           - 3000:8000
+    steps:
+      - name: Get container service hostname using curl
+        run: curl http://localhost:3000/
