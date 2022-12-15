@@ -34,7 +34,7 @@ jobs:
         run: |
           psql -h localhost -d postgres -U postgres -c 'SELECT 1;'
         env:
-          PGPASSWORD=password
+          PGPASSWORD: password
 
       - name: run multiple commands
         run: |
