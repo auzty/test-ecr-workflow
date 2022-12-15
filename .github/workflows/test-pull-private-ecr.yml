@@ -35,7 +35,7 @@ jobs:
           repository: auzty/test-ecr-workflow
           token: ${{ secrets.GH_PAT }}
           secrets: |
-            ECR_PASS_SECRET: ${{ teps.login-ecr.outputs.docker_password_075324509106_dkr_ecr_ap-southeast-1_amazonaws_com }}
+            ECR_PASS_SECRET: ${{ steps.login-ecr.outputs.docker_password_075324509106_dkr_ecr_ap-southeast-1_amazonaws_com }}
       
     outputs:
       registry: ${{ steps.login-ecr.outputs.registry }} 
