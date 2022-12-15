@@ -19,7 +19,7 @@ jobs:
     outputs:
       fullimageoutput: ${{ steps.fullimageformat.outputs.fullimage }}
       usernameoutput: ${{ steps.awscredsoutput.outputs.ECR_USER }}
-      passwdoutput: ${{ steps.awscredsoutput.outputs.ECR_PWD }}
+      passwdoutput: ${{ steps.awscredsoutput2.outputs.ecr_pas }}
     steps:
       - name: Login to Amazon ECR
         id: login-ecr
@@ -31,8 +31,11 @@ jobs:
       - name: set the env output
         id: awscredsoutput
         run: |
-          echo "ECR_PWD=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_OUTPUT
           echo "ECR_USER=${{ steps.login-ecr.outputs.username}}" >> $GITHUB_OUTPUT
+      - name: set the env output 2
+        id: awscredsoutput2
+        run: |
+          echo "ecr_pas=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_OUTPUT
       - name: set image full format
         id: fullimageformat
         run: |
