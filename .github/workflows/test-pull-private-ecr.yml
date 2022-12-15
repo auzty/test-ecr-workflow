@@ -44,7 +44,8 @@ jobs:
     steps:
       - name: test debugging
         run: |
-          echo ${{ needs.login-to-amazon-ecr.outputs.docker_registry }}
+          echo "reg: ${{ needs.login-to-amazon-ecr.outputs.docker_registry }}""
+          echo "u  : ${{ needs.login-to-amazon-ecr.outputs.docker_username }}"
 
   define-service:
     runs-on: ubuntu-latest
