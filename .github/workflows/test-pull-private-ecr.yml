@@ -31,8 +31,7 @@ jobs:
 
       - name: test debugging
         run: |
-          echo u "${{ steps.login-ecr.outputs.docker_username_075324509106_dkr_ecr_ap_southeast_1_amazonaws_com }}"
-          echo p "${{ steps.login-ecr.outputs.docker_password_075324509106_dkr_ecr_ap_southeast_1_amazonaws_com }}"
+          echo "registry : ${{ steps.login-ecr.outputs.registry }}"
       
     outputs:
       registry: ${{ steps.login-ecr.outputs.registry }} 
