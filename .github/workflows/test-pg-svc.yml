@@ -44,3 +44,9 @@ jobs:
           create role jajal;
           create database dbjajal owner jajal;
           EOF
+
+      - name: test result
+        run: |
+          psql -h localhost -d postgres -U postgres -c '\l'
+        env:
+          PGPASSWORD: password
