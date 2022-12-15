@@ -38,7 +38,7 @@ jobs:
 
   define-service:
     runs-on: ubuntu-latest
-    needs: setting-up-private-ecr
+    needs: login-to-amazon-ecr
     services:
       test-whoami:
         image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest
