@@ -2,6 +2,7 @@ name: Test Pull Private ECR
 
 env:
   REPOSITORY: yusuf-aws
+  ECR_IMAGE: jwilder/whoami
 
 on:
   workflow_dispatch:
