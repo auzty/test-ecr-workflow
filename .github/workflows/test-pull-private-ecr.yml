@@ -57,6 +57,7 @@ jobs:
       test-whoami:
         image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest
         credentials:
+          registry: 075324509106.dkr.ecr.ap-southeast-1.amazonaws.com
           username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
           password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
         ports:
