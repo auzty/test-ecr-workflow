@@ -37,6 +37,8 @@ jobs:
           PGPASSWORD: password
 
       - name: run multiple commands
+        env:
+          PGPASSWORD: password
         run: |
           psql -h localhost -d postgres -U postgres <<EOF
           create role jajal;
