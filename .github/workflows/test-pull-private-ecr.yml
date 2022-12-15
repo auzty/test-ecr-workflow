@@ -33,10 +33,10 @@ jobs:
           echo "ECR_PWD=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_ENV
           echo "ECR_REGISTRY=${{ steps.login-ecr.outputs.registry}}" >> $GITHUB_ENV
           echo "ECR_USER=${{ steps.login-ecr.outputs.username}}" >> $GITHUB_ENV
-        - name: set image full format
-          id: fullimageformat
-          run: |
-            echo "fullimage=${{ steps.login-ecr.outputs.registry}}/$REPOSITORY:latest" >> $GITHUB_OUTPUT
+      - name: set image full format
+        id: fullimageformat
+        run: |
+          echo "fullimage=${{ steps.login-ecr.outputs.registry}}/$REPOSITORY:latest" >> $GITHUB_OUTPUT
 
   define-service:
     runs-on: ubuntu-latest
