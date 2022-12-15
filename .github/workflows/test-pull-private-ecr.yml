@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       fullimageoutput: ${{ steps.fullimageformat.outputs.fullimage }}
+      usernameoutput: ${{ steps.awscredsoutput.outputs.ECR_USER }}
+      passwdoutput: ${{ steps.awscredsoutput.outputs.ECR_PWD }}
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -29,10 +31,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: set the env output
+        id: awscredsoutput
         run: |
-          echo "ECR_PWD=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_ENV
-          echo "ECR_REGISTRY=${{ steps.login-ecr.outputs.registry}}" >> $GITHUB_ENV
-          echo "ECR_USER=${{ steps.login-ecr.outputs.username}}" >> $GITHUB_ENV
+          echo "ECR_PWD=${{ steps.login-ecr.outputs.password}}" >> $GITHUB_OUTPUT
+          echo "ECR_USER=${{ steps.login-ecr.outputs.username}}" >> $GITHUB_OUTPUT
       - name: set image full format
         id: fullimageformat
         run: |
@@ -45,8 +47,8 @@ jobs:
       test-whoami:
         image: ${{ needs.setting-up-private-ecr.outputs.fullimageoutput }}
         credentials:
-          username: ${{ env.ECR_USER }} 
-          password: ${{ env.ECR_PWD }}
+          username: ${{ needs.setting-up-private-ecr.outputs.usernameoutput }} 
+          password: ${{ needs.setting-up-private-ecr.outputs.passwdoutput }}
         ports:
            - 3000:8000
     steps:
