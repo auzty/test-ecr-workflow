@@ -40,7 +40,7 @@ jobs:
         env:
           PGPASSWORD: password
         run: |
-          psql -h localhost -d postgres -U postgres <<EOF
+          psql -v ON_ERROR_STOP=1 -h localhost -d postgres -U postgres <<EOF
           create role jajal;
           create database dbjajal owner jajal;
           EOF
