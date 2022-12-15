@@ -51,7 +51,7 @@ jobs:
         image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest
         credentials:
           username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
-          password: ${{ secret.ECR_PASS_SECRET }}
+          password: ${{ secrets.ECR_PASS_SECRET }}
         ports:
            - 3000:8000
     steps:
