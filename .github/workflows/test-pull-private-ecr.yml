@@ -38,6 +38,14 @@ jobs:
       docker_username: ${{ steps.login-ecr.outputs.docker_username_075324509106_dkr_ecr_ap_southeast_1_amazonaws_com }}
       docker_password: ${{ steps.login-ecr.outputs.docker_password_075324509106_dkr_ecr_ap_southeast_1_amazonaws_com }}
 
+  debuggin-service:
+    runs-on: ubuntu-latest
+    needs: login-to-amazon-ecr
+    steps:
+      - name: test debugging
+        run: |
+          echo "${{ needs.login-to-amazon-ecr.outputs.registry }}/yusuf-aws:latest"
+
   define-service:
     runs-on: ubuntu-latest
     needs: login-to-amazon-ecr
