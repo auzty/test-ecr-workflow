@@ -38,7 +38,7 @@ jobs:
 
       - name: run multiple commands
         run: |
-          psql -h localhost -d postgres -u postgres <<EOF
+          psql -h localhost -d postgres -U postgres <<EOF
           create role jajal;
           create database dbjajal owner jajal;
           EOF
