@@ -46,8 +46,8 @@ jobs:
     steps:
       - name: testing var
         run: |
-          echo ---> ${{ needs.setting-up-private-ecr.outputs.usernameoutput }}
-          echo ---> ${{ needs.setting-up-private-ecr.outputs.passwdoutput }}
+          echo "---> ${{ needs.setting-up-private-ecr.outputs.usernameoutput }}"
+          echo "---> ${{ needs.setting-up-private-ecr.outputs.passwdoutput }}"
 
   define-service:
     runs-on: ubuntu-latest
