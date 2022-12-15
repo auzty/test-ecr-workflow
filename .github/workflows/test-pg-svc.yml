@@ -28,8 +28,8 @@ jobs:
     steps:
       - name: install psql-client
         run: |
-          apt-get update
-          apt-get install --yes --no-install-recommends postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends postgresql-client
       - name: test the db connections
         run: |
           psql -h localhost -d postgres -U postgres -c 'SELECT 1;'
