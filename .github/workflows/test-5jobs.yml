@@ -1,0 +1,34 @@
+name: Test 1 jobs 5 steps
+
+on:
+  workflow_dispatch:
+    inputs:
+      resume-steps:
+        description: 'SKIP JOB 2'
+        required: true
+        default: false
+        type: choice
+        options:
+          - true
+          - false
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: running step1
+        run: echo "Running step 1"
+      - name: running step2
+        id: step2
+        run: |
+          echo "Running step 2"
+          echo "step2output=${{ github.event.inputs.resume-steps }}" >> $GITHUB_INPUT
+      - name: running step3
+        if: steps.step2.output.step2output == true
+        run: echo "Running step 3"
+      - name: running step4
+        if: steps.step2.output.step2output == true
+        run: echo "Running step 4"
+      - name: running step5
+        if: steps.step2.output.step2output == true
+        run: echo "Running step 5"
