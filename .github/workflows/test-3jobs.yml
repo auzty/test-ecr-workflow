@@ -3,11 +3,14 @@ name: Test 3 jobs
 on:
   workflow_dispatch:
     inputs:
-      TTL_MINUTES:
-        description: 'Time for instance to live (minutes)'
+      skip-jobs:
+        description: 'SKIP JOB 2'
         required: true
-        default: '30'
-        type: number
+        default: 'yes'
+        type: choice
+        options:
+          - 'yes'
+          - 'no'
 
 jobs:
   job1:
@@ -17,6 +20,7 @@ jobs:
         run: echo "Running JOb 1"
   job2:
     runs-on: ubuntu-latest
+    if: github.event.inputs.skip-jobs == 'no'
     needs: job1
     steps: 
       - name: running job2
