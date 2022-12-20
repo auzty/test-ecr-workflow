@@ -18,7 +18,7 @@ on:
         type: choice
         options:
           - 'build'
-          - 'build-and-deploy'
+          - 'buildAndDeploy'
           - 'notbuild'
 
 jobs:
