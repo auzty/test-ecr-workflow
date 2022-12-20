@@ -1,0 +1,29 @@
+name: Test 3 jobs
+
+on:
+  workflow_dispatch:
+    inputs:
+      TTL_MINUTES:
+        description: 'Time for instance to live (minutes)'
+        required: true
+        default: '30'
+        type: number
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: running job1
+        run: echo "Running JOb 1"
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps: 
+      - name: running job2
+        run: echo "Running JOb 2"
+  job3:
+    runs-on: ubuntu-latest
+    needs: [job1,job2]
+    steps: 
+      - name: running job3
+        run: echo "Running JOb 3"
