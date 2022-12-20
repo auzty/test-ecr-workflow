@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       resume-steps:
-        description: 'SKIP JOB 2'
+        description: 'RUN JOB 2'
         required: true
         default: false
         type: choice
@@ -22,7 +22,7 @@ jobs:
         id: step2
         run: |
           echo "Running step 2"
-          echo "step2output=${{ github.event.inputs.resume-steps }}" >> $GITHUB_INPUT
+          echo "step2output=${{ github.event.inputs.resume-steps }}" >> $GITHUB_OUTPUT
       - name: running step3
         if: steps.step2.output.step2output == true
         run: echo "Running step 3"
