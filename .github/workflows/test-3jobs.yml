@@ -25,6 +25,8 @@ jobs:
     steps: 
       - name: running job2
         run: echo "Running JOb 2"
+      - name: Try to fail
+        run: exit 1
   job3:
     runs-on: ubuntu-latest
     needs: [job1,job2]
