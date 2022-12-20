@@ -29,8 +29,6 @@ jobs:
         if: ${{steps.step2.outputs.step2output == 'true'}}
         run: echo "Running step 3"
       - name: running step4
-        if: ${{steps.step2.outputs.step2output == 'true'}}
         run: echo "Running step 4"
       - name: running step5
-        if: ${{steps.step2.outputs.step2output == 'true'}}
         run: echo "Running step 5"
