@@ -23,6 +23,10 @@ jobs:
         run: |
           echo "Running step 2"
           echo "step2output=${{ github.event.inputs.resume-steps }}" >> $GITHUB_OUTPUT
+          if [[ "${{ github.event.inputs.resume-steps }}" == 'false' ]]
+          then
+            exit 1
+          fi
       - name: debugging
         run: echo "ini output ==>>> ${{steps.step2.outputs.step2output}}"
       - name: running step3
@@ -32,3 +36,8 @@ jobs:
         run: echo "Running step 4"
       - name: running step5
         run: echo "Running step 5"
+  job2:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: testing job2
+        run: echo "Running job 2 step1"
