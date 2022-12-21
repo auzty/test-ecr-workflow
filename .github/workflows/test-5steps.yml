@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       resume-steps:
-        description: 'RUN JOB 2'
+        description: 'RUN STEP 2'
         required: true
         default: false
         type: choice
